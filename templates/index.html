@@ -8,21 +8,27 @@
     <meta name="author" content="Rohan Jadvani">
 
     <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:200' rel='stylesheet' type='text/css'>
   </head>
 
   <body>
     <div class="container">
-      {% for pic_row in pic_rows %}
-        <div class="row">
-          {% for pic in pic_row %}
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-              <a class="thumbnail" href="#">
-                <img class="img-responsive" src="{{ pic }}" alt="">
-              </a>
-            </div>
-          {% endfor %}
-        </div>
-      {% endfor %}
+      <h1>Hack 112 Photobooth</h1>
+      <hr />
+      <div class="pic_layout">
+        {% for pic_row in pic_rows %}
+          <div class="row">
+            {% for pic in pic_row %}
+              <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <a class="thumbnail" href="#">
+                  <img class="img-responsive" src="{{ pic }}" alt="">
+                </a>
+              </div>
+            {% endfor %}
+          </div>
+        {% endfor %}
+      </div>
     </div>
   </body>
 
