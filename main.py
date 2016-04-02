@@ -8,6 +8,7 @@ def main():
     picsPerRow = 4
     listOfPics = os.listdir('media')
     listOfPics = map(lambda fp : '/media/' + fp, listOfPics)
+    listOfPics = list(listOfPics)[::-1]
     templatePics = [ ]
     tempRow = [ ]
     # add all in directory to template pictures
