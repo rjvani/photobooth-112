@@ -3,12 +3,21 @@ import os
 
 app = Flask(__name__)
 
+def createListOfPictures():
+    listOfPics = os.listdir('media')
+    baseSm = '/media/small/'
+    baseLg = '/media/full/'
+    listOfPics = list(sorted(listOfPics))[::-1]
+    # map each path to full and thumbnail
+    for index in range(len(listOfPics)):
+        fp = listOfPics[index]
+        listOfPics[index] = { 'small' : baseSm + fp, 'full' : baseLg + fp}
+    return listOfPics
+
 @app.route("/")
 def main():
     picsPerRow = 4
-    listOfPics = os.listdir('media')
-    listOfPics = map(lambda fp : '/media/' + fp, listOfPics)
-    listOfPics = list(sorted(listOfPics))
+    listOfPics = createListOfPictures()
     templatePics = [ ]
     tempRow = [ ]
 
