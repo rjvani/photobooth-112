@@ -19,9 +19,6 @@ def main():
             tempRow = [ ]
     if len(tempRow) > 0:
         templatePics.append(tempRow)
-    
-    for line in templatePics:
-        print(line)
 
     return render_template('index.html', pic_rows=templatePics)
 
