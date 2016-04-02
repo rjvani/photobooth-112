@@ -4,9 +4,9 @@ import os
 app = Flask(__name__)
 
 def createListOfPictures():
-    listOfPics = os.listdir('media')
     baseSm = '/media/small/'
     baseLg = '/media/full/'
+    listOfPics = os.listdir(baseSm)
     listOfPics = list(sorted(listOfPics))[::-1]
     # map each path to full and thumbnail
     for index in range(len(listOfPics)):
