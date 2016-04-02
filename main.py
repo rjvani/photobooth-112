@@ -3,10 +3,8 @@ import os
 
 app = Flask(__name__)
 
-def createListOfPictures():
-    baseSm = '/media/small/'
-    baseLg = '/media/full/'
-    listOfPics = os.listdir('media/small')
+def createListOfPictures(baseSm, baseLg, picDir):
+    listOfPics = os.listdir(picDir)
     listOfPics = list(sorted(listOfPics))[::-1]
     # map each path to full and thumbnail
     for index in range(len(listOfPics)):
@@ -14,10 +12,9 @@ def createListOfPictures():
         listOfPics[index] = { 'small' : baseSm + fp, 'full' : baseLg + fp}
     return listOfPics
 
-@app.route("/")
-def main():
+def getTemplatePics(baseSm='/media/small/', baseLg='/media/full/', picDir='media/small'):
     picsPerRow = 4
-    listOfPics = createListOfPictures()
+    listOfPics = createListOfPictures(baseSm, baseLg, picDir)
     templatePics = [ ]
     tempRow = [ ]
 
@@ -31,6 +28,18 @@ def main():
     if len(tempRow) > 0:
         templatePics.append(tempRow)
 
+    return templatePics
+
+@app.route("/")
+def main():
+    templatePics = getTemplatePics()
+    return render_template('index.html', pic_rows=templatePics)
+
+@app.route("/og-squad")
+def og():
+    templatePics = getTemplatePics(baseSm='/media/og-squad/small/',
+                                   baseLg='/media/og-squad/full/',
+                                   picDir='media/og-squad/small')
     return render_template('index.html', pic_rows=templatePics)
 
 if __name__ == "__main__":
